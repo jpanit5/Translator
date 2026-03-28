@@ -3,15 +3,12 @@ import cv2
 import pytesseract
 from PIL import Image
 import numpy as np
-from googletrans import Translator
-
-# Init translator
-translator = Translator()
+from deep_translator import GoogleTranslator
 
 st.set_page_config(page_title="Image Translator", layout="centered")
 
 st.title("🌍 Image Translator (FREE)")
-st.caption("Upload image → Extract → Translate (ENG + Chinese)")
+st.caption("Upload image → Extract → Translate (ENG → Chinese)")
 
 uploaded_file = st.file_uploader("Upload Image", type=["jpg", "png", "jpeg"])
 
@@ -45,10 +42,14 @@ if uploaded_file:
 
         if cleaned_text:
             try:
-                # Translate (FREE)
-                translated = translator.translate(cleaned_text, dest='zh-cn').text
+                # ✅ NEW TRANSLATOR (STABLE)
+                translated = GoogleTranslator(
+                    source='auto',
+                    target='zh-cn'
+                ).translate(cleaned_text)
+
             except Exception as e:
-                translated = "Translation error"
+                translated = f"Translation error: {e}"
 
             with col2:
                 st.subheader("🌍 Translated Text")

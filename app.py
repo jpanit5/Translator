@@ -36,20 +36,21 @@ if uploaded_file:
 
         col1, col2 = st.columns(2)
 
+        # LEFT SIDE
         with col1:
             st.subheader("📝 Extracted Text")
             st.text(cleaned_text if cleaned_text else "No text detected")
 
+        # RIGHT SIDE
         if cleaned_text:
             try:
-                # ✅ NEW TRANSLATOR (STABLE)
                 translated = GoogleTranslator(
                     source='auto',
-                    target='zh-cn'
+                    target='zh-CN'  # ✅ FIXED HERE
                 ).translate(cleaned_text)
 
             except Exception as e:
-                translated = f"Translation error: {e}"
+                translated = f"❌ Translation error: {e}"
 
             with col2:
                 st.subheader("🌍 Translated Text")

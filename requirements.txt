@@ -3,5 +3,5 @@ opencv-python-headless
 pytesseract
 pillow
 numpy
-googletrans==4.0.0-rc1
 deep-translator
+streamlit-paste-button
